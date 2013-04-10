@@ -1,0 +1,9 @@
+{
+  "name": "Node-Mock-Server",
+  "description": "A mock http server for testing your client side code via the node.js express serving up static content and registering your custom/mocked routes.",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.1.1"
+  }
+}

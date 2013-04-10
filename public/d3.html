@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>Chronological Diagram of Asia</title>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="d3/d3.v3.js"></script>
+		<style type="text/css">
+	
+		#graphs {
+			border: 1px solid black;
+			box-shadow: 4px 4px 4px #ADADAD;
+			background-color: #DDDFDD;
+			width: 802px;
+			height: 472px;
+		}
+ 
+		</style>
+
+		<script type="text/javascript">
+			// Line chart example code to borrow. 
+			// http://tympanus.net/codrops/2012/08/29/multiple-area-charts-with-d3-js/
+			
+			var dataset = [ 
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 62,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:17PM',
+				yesVotes: 15,
+				yesComments: 3,
+				noVotes: 0,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:19 PM',
+				yesVotes: 27,
+				yesComments: 1,
+				noVotes: 11,
+				noComments: 5
+			},
+			{
+				dateTime: '4/8/2013 12:21 PM',
+				yesVotes: 96,
+				yesComments: 9,
+				noVotes: 5,
+				noComments: 2
+			},
+			{
+				dateTime: '4/8/2013 12:25 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 9,
+				noComments: 9
+			},
+			{
+				dateTime: '4/8/2013 12:27 PM',
+				yesVotes: 75,
+				yesComments: 2,
+				noVotes: 7,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:28 PM',
+				yesVotes: 5,
+				yesComments: 0,
+				noVotes: 99,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 52,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 92,
+				yesComments: 4,
+				noVotes: 93,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:17PM',
+				yesVotes: 15,
+				yesComments: 3,
+				noVotes: 0,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:19 PM',
+				yesVotes: 27,
+				yesComments: 1,
+				noVotes: 11,
+				noComments: 5
+			},
+			{
+				dateTime: '4/8/2013 12:21 PM',
+				yesVotes: 96,
+				yesComments: 9,
+				noVotes: 5,
+				noComments: 2
+			},
+			{
+				dateTime: '4/8/2013 12:25 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 9,
+				noComments: 9
+			},
+			{
+				dateTime: '4/8/2013 12:27 PM',
+				yesVotes: 75,
+				yesComments: 2,
+				noVotes: 7,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:28 PM',
+				yesVotes: 5,
+				yesComments: 0,
+				noVotes: 99,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 52,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 92,
+				yesComments: 4,
+				noVotes: 93,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:17PM',
+				yesVotes: 15,
+				yesComments: 3,
+				noVotes: 0,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:19 PM',
+				yesVotes: 27,
+				yesComments: 1,
+				noVotes: 11,
+				noComments: 5
+			},
+			{
+				dateTime: '4/8/2013 12:21 PM',
+				yesVotes: 96,
+				yesComments: 9,
+				noVotes: 5,
+				noComments: 2
+			},
+			{
+				dateTime: '4/8/2013 12:25 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 9,
+				noComments: 9
+			},
+			{
+				dateTime: '4/8/2013 12:27 PM',
+				yesVotes: 75,
+				yesComments: 2,
+				noVotes: 7,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:28 PM',
+				yesVotes: 5,
+				yesComments: 0,
+				noVotes: 99,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 52,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 92,
+				yesComments: 4,
+				noVotes: 93,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:17PM',
+				yesVotes: 15,
+				yesComments: 3,
+				noVotes: 0,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:19 PM',
+				yesVotes: 27,
+				yesComments: 1,
+				noVotes: 11,
+				noComments: 5
+			},
+			{
+				dateTime: '4/8/2013 12:21 PM',
+				yesVotes: 96,
+				yesComments: 9,
+				noVotes: 5,
+				noComments: 2
+			},
+			{
+				dateTime: '4/8/2013 12:25 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 9,
+				noComments: 9
+			},
+			{
+				dateTime: '4/8/2013 12:27 PM',
+				yesVotes: 75,
+				yesComments: 2,
+				noVotes: 7,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:28 PM',
+				yesVotes: 5,
+				yesComments: 0,
+				noVotes: 99,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 52,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 92,
+				yesComments: 4,
+				noVotes: 93,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:17PM',
+				yesVotes: 15,
+				yesComments: 3,
+				noVotes: 0,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:19 PM',
+				yesVotes: 27,
+				yesComments: 1,
+				noVotes: 11,
+				noComments: 5
+			},
+			{
+				dateTime: '4/8/2013 12:21 PM',
+				yesVotes: 96,
+				yesComments: 9,
+				noVotes: 5,
+				noComments: 2
+			},
+			{
+				dateTime: '4/8/2013 12:25 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 9,
+				noComments: 9
+			},
+			{
+				dateTime: '4/8/2013 12:27 PM',
+				yesVotes: 75,
+				yesComments: 2,
+				noVotes: 7,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:28 PM',
+				yesVotes: 5,
+				yesComments: 0,
+				noVotes: 99,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 52,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 92,
+				yesComments: 4,
+				noVotes: 93,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:17PM',
+				yesVotes: 15,
+				yesComments: 3,
+				noVotes: 0,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:19 PM',
+				yesVotes: 27,
+				yesComments: 1,
+				noVotes: 11,
+				noComments: 5
+			},
+			{
+				dateTime: '4/8/2013 12:21 PM',
+				yesVotes: 96,
+				yesComments: 9,
+				noVotes: 5,
+				noComments: 2
+			},
+			{
+				dateTime: '4/8/2013 12:25 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 9,
+				noComments: 9
+			},
+			{
+				dateTime: '4/8/2013 12:27 PM',
+				yesVotes: 75,
+				yesComments: 2,
+				noVotes: 7,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:28 PM',
+				yesVotes: 5,
+				yesComments: 0,
+				noVotes: 99,
+				noComments: 0
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 22,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 52,
+				yesComments: 4,
+				noVotes: 3,
+				noComments: 3
+			},
+			{
+				dateTime: '4/8/2013 12:15 PM',
+				yesVotes: 92,
+				yesComments: 4,
+				noVotes: 93,
+				noComments: 3
+			}
+			];
+
+	$(document).ready(function() {
+
+			getMaxValue = function(data) {
+				var maxValue = 0;
+				for (var i = 0; i < data.length; i++)
+				{
+					var item = data[i];
+					if (maxValue < item.yesVotes) {
+						maxValue = item.yesVotes;
+					}
+					if (maxValue < item.yesComments) {
+						maxValue = item.yesComments;
+					}
+					if (maxValue < item.noVotes) {
+						maxValue = item.noVotes;
+					}
+					if (maxValue < item.noComments) {
+						maxValue = item.noComments;
+					}
+				}
+				return maxValue;
+			};
+
+			var w = 800,
+				h = 200,
+				barPadding = 1,
+				barWidthFactor = Math.floor((w - dataset.length + 1) / dataset.length),
+				heightFactor = (h - 10) / getMaxValue(dataset); // Use this for the factor against the values to ensure we have full spectrum of the graph.
+			
+			var svgHeader = d3.select("#graphs").append("svg")
+			    .style("border", "none")
+			    .style("border-bottom", "1px black solid")
+			    .style("display", "block")
+			    .style("background-color", "#ADADAD")
+				.attr("width", w + 2)
+	   			.attr("height", 70);
+
+			var svgTop = d3.select("#graphs").append("svg")
+			    .style("display", "block")
+				.attr("width", w)
+	   			.attr("height", h);
+
+			var svgBottom = d3.select("#graphs").append("svg")
+			    .style("display", "block")
+				.attr("width", w)
+	   			.attr("height", h);
+
+/*			var svgLines = d3.select("#graphs").append("svg")
+				.style("stroke", 1)
+				.attr("width", w)
+	   			.attr("height", h);
+*/
+	   		var offset = 125;
+
+			svgHeader.append("rect")
+				.attr("x", offset)
+				.attr("y", 10)
+				.style("border-collapse", "collapse")
+				.style("border", "1px black solid")
+				.attr("fill", "#007700")
+				.attr("width", 20)
+				.attr("height", 50);
+
+			offset += 30;
+
+			svgHeader.append("text")
+				.attr("x", offset)
+				.attr("y", 42)
+				.attr("width", 100)
+				.attr("height", 50)
+				.text("'Yes' Votes");
+
+			offset += 120;
+
+			svgHeader.append("rect")
+				.attr("x", offset)
+				.attr("y", 10)
+				.style("border-collapse", "collapse")
+				.style("border", "1px black solid")
+				.attr("fill", "#55FF55")
+				.attr("width", 20)
+				.attr("height", 50);
+
+			offset += 30;
+
+			svgHeader.append("text")
+				.attr("x", offset)
+				.attr("y", 42)
+				.attr("width", 100)
+				.attr("height", 50)
+				.text("'Yes' Comments");
+
+			offset += 120;
+			svgHeader.append("rect")
+				.attr("x", offset)
+				.attr("y", 10)
+				.style("border-collapse", "collapse")
+				.style("border", "1px black solid")
+				.attr("fill", "#FF0000")
+				.attr("width", 20)
+				.attr("height", 50);
+
+			offset += 30;
+
+			svgHeader.append("text")
+				.attr("x", offset)
+				.attr("y", 42)
+				.attr("width", 100)
+				.attr("height", 50)
+				.text("'No' Votes");
+
+			offset += 120;
+			svgHeader.append("rect")
+				.attr("x", offset)
+				.attr("y", 10)
+				.style("border-collapse", "collapse")
+				.style("border", "1px black solid")
+				.attr("fill", "#FF9999")
+				.attr("width", 20)
+				.attr("height", 50);
+
+			offset += 30;
+
+			svgHeader.append("text")
+			   .attr("x", offset)
+			   .attr("y", 42)
+			   .attr("width", 100)
+			   .attr("height", 50)
+			   .text("'No' Comments");
+
+
+
+	   		offset = (barWidthFactor + 1) * -1;
+
+			svgTop.selectAll("rect.votes")
+			   .data(dataset)
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d) {
+			        offset = offset += barWidthFactor + 1;
+			        return offset + "px";
+			    })
+			   .attr("y", function(d) { return h - d.yesVotes * heightFactor; })
+			   .attr("fill", "#007700")
+			   .attr("width", barWidthFactor)
+			   .attr("height", function(d) {
+					return d.yesVotes * heightFactor;
+			    });
+
+	   		offset = (barWidthFactor + 1) * -1;
+
+			svgTop.selectAll("rect.comments")
+			   .data(dataset)
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d) {
+			        offset = offset += barWidthFactor + 1;
+			        return offset + "px";
+			    })
+			   .attr("y", function(d) { return h - d.yesComments * heightFactor; })
+			   .attr("fill", "#55FF55")
+			   .attr("width", barWidthFactor)
+			   .attr("height", function(d) {
+					return d.yesVotes * heightFactor;
+			    });
+
+	   		offset = (barWidthFactor + 1) * -1;
+
+			svgBottom.selectAll("rect.votes")
+				.data(dataset)
+				.enter()
+				.append("rect")
+				.attr("x", function(d) {
+			        offset = offset += barWidthFactor + 1;
+					return offset + "px";
+				})
+				.attr("y", 0)
+				.attr("fill", "#FF0000")
+				.attr("width", barWidthFactor)
+			    .attr("height", function(d) {
+			        return d.noVotes * heightFactor;
+			    });
+	   		offset = (barWidthFactor + 1) * -1;
+
+			svgBottom.selectAll("rect.comments")
+				.data(dataset)
+				.enter()
+				.append("rect")
+				.attr("x", function(d) {
+			        offset = offset += barWidthFactor + 1;
+					return offset + "px";
+				})
+				.attr("y", 0)
+				.attr("fill", "#FF9999")
+				.attr("width", barWidthFactor)
+			    .attr("height", function(d) {
+			        return d.noComments * heightFactor;
+			    });
+
+
+
+
+
+
+
+		/*	var margin = 20,
+				y = d3.scale.linear().domain([0, d3.max(dataset)]).range([0 + margin, h - margin]),
+				x = d3.scale.linear().domain([0, dataset.length]).range([0 + margin, w - margin]);
+
+			var g = svgLines.append("svg:g")
+			    .attr("transform", "translate(0, 200)");
+
+			var line = d3.svg.line()
+			    .x(function(d,i) { return x(i); })
+			    .y(function(d) { return -1 * y(d.yesVotes); })
+
+			g.append("svg:path").attr("d", line(dataset));
+
+			g.append("svg:line")
+			    .attr("x1", x(0))
+			    .attr("y1", -1 * y(0))
+			    .attr("x2", x(w))
+			    .attr("y2", -1 * y(0));
+			 
+			g.append("svg:line")
+			    .attr("x1", x(0))
+			    .attr("y1", -1 * y(0))
+			    .attr("x2", x(0))
+			    .attr("y2", -1 * y(d3.max(dataset)));
+
+		    g.selectAll(".xLabel")
+				.data(x.ticks(5))
+				.enter().append("svg:text")
+				.attr("class", "xLabel")
+				.text(String)
+				.attr("x", function(d) { return x(d) })
+				.attr("y", 0)
+				.attr("text-anchor", "middle");
+	 
+			g.selectAll(".yLabel")
+			    .data(y.ticks(4))
+			    .enter().append("svg:text")
+			    .attr("class", "yLabel")
+			    .text(String)
+			    .attr("x", 0)
+			    .attr("y", function(d) { return -1 * y(d) })
+			    .attr("text-anchor", "right")
+			    .attr("dy", 4);
+
+			g.selectAll(".xTicks")
+			    .data(x.ticks(5))
+			    .enter().append("svg:line")
+			    .attr("class", "xTicks")
+			    .attr("x1", function(d) { return x(d); })
+			    .attr("y1", -1 * y(0))
+			    .attr("x2", function(d) { return x(d); })
+			    .attr("y2", -1 * y(-0.3));
+			 
+			g.selectAll(".yTicks")
+			    .data(y.ticks(4))
+			    .enter().append("svg:line")
+			    .attr("class", "yTicks")
+			    .attr("y1", function(d) { return -1 * y(d); })
+			    .attr("x1", x(-0.3))
+			    .attr("y2", function(d) { return -1 * y(d); })
+			    .attr("x2", x(0));*/
+
+			/*offset = -21;
+			
+			var line = d3.svg.line()
+			    .x(function(d) {
+					offset = offset += 21;
+					return offset + "px";
+				})
+			    .y(function(d) {
+					return d.yesVotes * 3;
+			    })
+			    .interpolate("basis");
+
+			svgLines.selectAll("path")
+			    .data([0, 0.2, 0.4, 0.6, 0.8, 1])
+			  	.enter()
+			  	.append("path")
+			    .attr("d", function(d) { return line.tension(d)(data); });
+	*/
+});
+		</script>
+
+	</head>
+	<body>
+
+		<h1>Presentation Responses</h1>
+		<div id="graphs">
+		</div>
+	</body>
+</html>
