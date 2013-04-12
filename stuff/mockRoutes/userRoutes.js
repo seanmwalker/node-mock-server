@@ -1,5 +1,6 @@
-function userRoutes()
-{
+exports = module.exports = function() { // = userRoutes
+	var __ = require("underscore");
+
 	var registerRoutes = function(app) {
 		// Consider the in memory process to make this 'work' for real on a meta level. Routes that call the crudl functions with a few parameters.
 		app.get('/user', function(req, res){
@@ -44,5 +45,3 @@ function userRoutes()
 		getRouteDisplayInformation: getRouteDisplayInformation
 	};
 };
-
-module.exports = userRoutes;

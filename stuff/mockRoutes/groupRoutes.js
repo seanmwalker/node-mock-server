@@ -1,5 +1,4 @@
-function groupRoutes()
-{
+exports = module.exports = function() { //= groupRoutes 
 	var registerRoutes = function(app) {
 		// Consider the in memory process to make this 'work' for real on a meta level. Routes that call the crudl functions with a few parameters.
 		app.get('/group', function(req, res){
@@ -44,5 +43,3 @@ function groupRoutes()
 		getRouteDisplayInformation: getRouteDisplayInformation
 	};
 };
-
-module.exports = groupRoutes;
