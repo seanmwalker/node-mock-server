@@ -74,8 +74,8 @@ module.exports.restInMemoryProcessor = function() { //exports = module.exports =
 				}
 				else {
 					var newId =  __.max(data, function(dataItem) { 
-						return (dataItem && dataItem[autoIncrementKey]) ? dataItem[autoIncrementKey] + 1 : null; ) || 1;
-					}
+						return ((dataItem && dataItem[autoIncrementKey]) ? dataItem[autoIncrementKey] + 1 : null ) || 1;
+					});
 
 					if (newId > 999999999 || newId < 1) {
 						newId = 1;
