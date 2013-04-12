@@ -1,5 +1,5 @@
-
-module.exports.restInMemoryProcessor = function() { //exports = module.exports = 
+// module.exports.restInMemoryProcessor = 
+exports = module.exports =function() { 
 
 	var initializeCrudlRoutes =  function(app, listUrl, getUrl, postUrl, postPropertyToAutoIncrement, putUrl, deleteUrl, jsonDataList) {
 		var __ = require("underscore"),
